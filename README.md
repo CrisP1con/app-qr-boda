@@ -32,7 +32,7 @@ El proyecto no es multi-boda, multi-cliente ni SaaS.
 
 - Laravel 13.
 - PHP 8.3.
-- SQLite.
+- MySQL.
 - Vue 3 e Inertia.js.
 - Tailwind CSS 4.
 - Laravel Jetstream para el administrador.
@@ -47,7 +47,7 @@ El proyecto no es multi-boda, multi-cliente ni SaaS.
 - Composer.
 - Node.js y npm.
 - Extensión GD de PHP para procesar imágenes.
-- SQLite habilitado.
+- MySQL 8 o compatible.
 
 ## Instalación inicial
 
@@ -66,7 +66,7 @@ Copy-Item .env.example .env
 php artisan key:generate
 ```
 
-Verificá que exista la base SQLite configurada en `.env`. Luego ejecutá:
+Verificá que exista la base MySQL configurada en `.env`. Luego ejecutá:
 
 ```bash
 php artisan migrate
@@ -190,7 +190,7 @@ vendor/bin/pint --dirty --format agent
 
 ### 1. Preparar el servidor
 
-El servidor debe tener PHP 8.3, Composer, Node.js durante el build, SQLite y la extensión GD habilitada.
+El servidor debe tener PHP 8.3, Composer, Node.js durante el build, MySQL y la extensión GD habilitada.
 
 El servidor web debe apuntar al directorio:
 
@@ -217,7 +217,12 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://tu-dominio.example
 
-DB_CONNECTION=sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=qr_boda
+DB_USERNAME=root
+DB_PASSWORD=tu_clave
 QUEUE_CONNECTION=database
 BROADCAST_CONNECTION=reverb
 FILESYSTEM_DISK=local
@@ -275,7 +280,7 @@ El proxy web debe permitir conexiones WebSocket hacia Reverb si se utiliza un do
 - Mantener `APP_DEBUG=false` en producción.
 - Mantener activo el rate limiting de subidas.
 - Verificar límites de tamaño de PHP y del proxy web.
-- Configurar backups de la base SQLite y de `storage/app/public`.
+- Configurar backups de la base MySQL y de `storage/app/public`.
 - No exponer el puerto interno de Reverb públicamente si el proxy puede actuar como intermediario.
 
 ## Alcance fuera del proyecto
